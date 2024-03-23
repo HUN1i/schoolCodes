@@ -1,0 +1,74 @@
+<!-- templates/course_management.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Management</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Course Management</h1>
+      <hr />
+      <h2>Register Course</h2>
+      <form method="POST" action="/register_course">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Enter course name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="professor">Professor:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="professor"
+            name="professor"
+            placeholder="Enter professor"
+          />
+        </div>
+        <div class="form-group">
+          <label for="credit">Credit:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="credit"
+            name="credit"
+            placeholder="Enter credit"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+      <hr />
+      <h2>Course List</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Professor</th>
+            <th>Credit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% courses.forEach(function(course) { %>
+          <tr>
+            <td><%= course.name %></td>
+            <td><%= course.professor %></td>
+            <td><%= course.credit %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

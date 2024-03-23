@@ -1,0 +1,81 @@
+<!-- templates/enrollment_management.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enrollment Management</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Enrollment Management</h1>
+      <hr />
+      <h2>Register Enrollment</h2>
+      <form method="POST" action="/register_enrollment">
+        <div class="form-group">
+          <label for="student_id">Student:</label>
+          <select class="form-control" id="student_id" name="student_id">
+            <% students.forEach(function(student) { %>
+            <option value="<%= student.id %>"><%= student.name %></option>
+            <% }); %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="course_id">Course:</label>
+          <select class="form-control" id="course_id" name="course_id">
+            <% courses.forEach(function(course) { %>
+            <option value="<%= course.id %>">
+              <%= course.name %> [<%= course.professor %>]
+            </option>
+            <% }); %>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+      <hr />
+      <h2>Cancel Enrollment</h2>
+      <form method="POST" action="/cancel_enrollment">
+        <div class="form-group">
+          <label for="enrollment_id">Enrollment ID:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="enrollment_id"
+            name="enrollment_id"
+            placeholder="Enter enrollment ID"
+          />
+        </div>
+        <button type="submit" class="btn btn-danger">Cancel</button>
+      </form>
+      <hr />
+      <h2>Enrollment List</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Student Number</th>
+            <th>Student Name</th>
+            <th>Course Name</th>
+            <th>Professor</th>
+            <th>Credit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% enrollments.forEach(function(enrollment) { %>
+          <tr>
+            <td><%= enrollment.student_number %></td>
+            <td><%= enrollment.student_name %></td>
+            <td><%= enrollment.course_name %></td>
+            <td><%= enrollment.professor %></td>
+            <td><%= enrollment.credit %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
